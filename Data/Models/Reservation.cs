@@ -7,16 +7,17 @@ namespace Data.Models
     public class Reservation
     {
         public int Id { get; set; }
+
+        public DateTime CheckInDate { get; set; }
+
+        public DateTime CheckOutDate { get; set; }
+
         public int ClientId { get; set; }
         public int RoomId { get; set; }
 
-        public DateTime ArrivalDate { get; set; }
-
-        public DateTime EvictionDate { get; set; }
-
         public override string ToString()
         {
-            return $"{ArrivalDate} - {EvictionDate}";
+            return $"{CheckInDate.ToString("d")} - {CheckOutDate.ToString("d")}";
         }
 
     }

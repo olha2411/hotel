@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Data.Models.Enums
 {
-    public enum RoomByOccupancy
+    public enum Options
     {
-        Single,
-        Double,
-        Triple,
-        Quad
+        Conditioner,
+        Crib,
+        Refrigerator,
+        MiniBar
 
     }
 }

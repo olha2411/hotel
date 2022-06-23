@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Data;
+using System.Text;
+using System.Threading.Tasks;
 using Data.Models;
 using Hotel.ViewModels;
 
 
-namespace App
+namespace Lab11
 {
     public static class Viewer
     {
@@ -43,15 +43,16 @@ namespace App
                 Console.WriteLine("\t" + item.Room.Number + "\t" + item.RoomType.Type);
         }
 
-        
-        public static void ShowRoomReservations(System.Collections.Generic.Dictionary<int, IEnumerable<Reservation>> reservations)
+
+        public static void ShowRoomReservations(Dictionary<int, IEnumerable<Reservation>> reservations)
         {
             Console.WriteLine("All clients:");
-              
+
             foreach (var item in reservations)
-                Console.WriteLine("\t" + item.RoomId );
+                Console.WriteLine("\t" + item.RoomId);
         }
-        
+
 
     }
 }
+

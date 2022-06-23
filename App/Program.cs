@@ -10,7 +10,14 @@ namespace App
             Queries hotel = new Queries();
 
             Viewer.ShowAllClients(hotel.GetAllClients());
+
             Viewer.ShowAllClientsReservation(hotel.GetClientsReservation());
+
+            Viewer.ShowClientSurnameInfo(hotel.GetClientSurnameInfo());
+
+            Viewer.ShowRoomTypes(hotel.GetRoomTypes());
+
+            System.Collections.Generic.
         }
     }
 }
