@@ -9,8 +9,8 @@ namespace Lab11
     {
         static void Main(string[] args)
         {
-            Queries hotel = new Queries();          
-                       
+            Queries hotel = new Queries();
+
             Printer.PrintAllClients(hotel.GetAllClients());
             Printer.PrintAllReservations(hotel.GetAllReservations());
             Printer.PrintAllReservationsGroupedByClient(hotel.GetAllReservationsGroupedByClient());

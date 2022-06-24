@@ -35,16 +35,26 @@ namespace Hotel
                       };
         }
 
-        // 3. All Reservations With Room Info Grouped By Client, Sorted By Client Surname And CheckIn Date        
-        public IEnumerable<IGrouping<Client, (Client Client, Reservation Reservation, Room Room, RoomType RoomType)>> GetAllReservationsGroupedByClient()
+        // 3. All Reservations With Room Info Grouped By Client, Sorted By Client Surname And CheckIn Date 
+        
+        public Dictionary<Client, IEnumerable<ReservationViewModel>> GetAllReservationsGroupedByClient()
         {
-            return from reservation in DataContext.Reservations
-                   join client in DataContext.Clients on reservation.ClientId equals client.Id
-                   join room in DataContext.Rooms on reservation.RoomId equals room.Id
-                   join type in DataContext.RoomTypes on room.TypeId equals type.Id
-                   orderby client.Surname, reservation.CheckInDate
-                   group (Client: client, Reservation: reservation, Room: room, RoomType: type) by client into g
-                   select g;
+            var query = from reservation in DataContext.Reservations
+                       join client in DataContext.Clients on reservation.ClientId equals client.Id
+                       join room in DataContext.Rooms on reservation.RoomId equals room.Id
+                       join type in DataContext.RoomTypes on room.TypeId equals type.Id
+                       orderby client.Surname, reservation.CheckInDate
+                       group new ReservationViewModel()
+                       {
+                           Client = client,
+                           Room = room,
+                           Reservation = reservation,
+                           RoomType = type
+                       }
+                        by client into g
+                       select g;
+
+            return query.ToDictionary(m => m.Key, n => n.Select(room => room));
         }
 
         // 4. Rooms With Their Types
@@ -91,40 +101,53 @@ namespace Hotel
         }
 
         // 8. Clients With Reservations Count
-        public IEnumerable<(Client Client, int Count)> GetClientsWithReservationsCount()
+        public Dictionary<Client, IEnumerable<Reservation>> GetClientsWithReservationsCount()
         {
-            return   from client in DataContext.Clients
-                     join reservation in DataContext.Reservations on client.Id equals reservation.ClientId
-                     group reservation by client into g
-                     orderby g.Count() descending          
-                     select (Client: g.Key, Count: g.Count());
+            var query =  from client in DataContext.Clients
+                         join reservation in DataContext.Reservations on client.Id equals reservation.ClientId
+                         group reservation by client into g
+                         orderby g.Count() descending          
+                         select g;
+
+            return query.ToDictionary(g => g.Key, g => g.Select(r => r));
 
         }
         
 
         // 9. Rooms With Reservations, Sorted By CheckIn Date
-        public IEnumerable<IGrouping<(Room Room, RoomType RoomType), Reservation>> GetRoomsWithReservations()
+        public Dictionary<RoomTypeViewModel, IEnumerable<Reservation>> GetRoomsWithReservations()
         {
-            return from room in DataContext.Rooms
-                   join type in DataContext.RoomTypes on room.TypeId equals type.Id
-                   join reservation in DataContext.Reservations on room.Id equals reservation.RoomId
-                   orderby reservation.CheckInDate
-                   group reservation by (Room: room, RoomType: type) into g
-                   select g;
+            var query =  from room in DataContext.Rooms
+                         join type in DataContext.RoomTypes on room.TypeId equals type.Id
+                         join reservation in DataContext.Reservations on room.Id equals reservation.RoomId
+                         orderby reservation.CheckInDate
+                         group reservation by new RoomTypeViewModel()
+                         { 
+                             Room = room,
+                             RoomType = type,
+                         } 
+                         into g
+                         select g;
+
+            return query.ToDictionary(g => g.Key, g => g.Select(r => r));
 
           
         }
 
         // 10. Currently Occupied Rooms
         
-        public IEnumerable<(Room Room, RoomType RoomType)> GetOccupiedRooms()
+        public IEnumerable<RoomTypeViewModel> GetOccupiedRooms()
         {
             return from room in DataContext.Rooms
                    join type in DataContext.RoomTypes on room.TypeId equals type.Id
                    join reservation in DataContext.Reservations on room.Id equals reservation.RoomId
                    where reservation.CheckInDate <= DateTime.Today && DateTime.Today <= reservation.CheckOutDate
-                   group reservation by (Room: room, RoomType: type) into g
-                   select g.Key;
+                   select new RoomTypeViewModel
+                   {
+                       Room = room,
+                       RoomType = type
+
+                   };
         }
 
         // 11. Client Who Are More Than 21
@@ -143,7 +166,6 @@ namespace Hotel
                    {                        
                         Room = room,                        
                         RoomType = type
-
                    };
         }
 

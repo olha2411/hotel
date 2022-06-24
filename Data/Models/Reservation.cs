@@ -5,9 +5,7 @@ using System.Text;
 namespace Data.Models
 {
     public class Reservation
-    {
-        public int Id { get; set; }
-
+    {        
         public DateTime CheckInDate { get; set; }
 
         public DateTime CheckOutDate { get; set; }
