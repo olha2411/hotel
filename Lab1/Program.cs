@@ -11,7 +11,7 @@ namespace Lab11
         {
             Queries hotel = new Queries();
 
-            Printer.PrintAllClients(hotel.GetAllClients());
+            Printer.PrintAllRooms(hotel.GetAllRooms());
             Printer.PrintAllReservations(hotel.GetAllReservations());
             Printer.PrintAllReservationsGroupedByClient(hotel.GetAllReservationsGroupedByClient());
             Printer.PrintAllRoomsWithTheirTypes(hotel.GetAllRoomsWithTheirTypes());
@@ -23,9 +23,11 @@ namespace Lab11
             Printer.PrintOccupiedRooms(hotel.GetOccupiedRooms());
             Printer.PrintAdultClients(hotel.GetAdultClients());
             Printer.PrintUnoccupiedRooms(hotel.GetUnoccupiedRooms());
-            Printer.PrintClientsWithPatroymic(hotel.GetClientsWithPatroymic());
-            Printer.PrintAllRoomOptions(hotel.GetAllRoomOptions());
+            Printer.PrintClientsWithPatronymic(hotel.GetClientsWithPatronymic());            
             Printer.PrintRoomsWithRefrigerator(hotel.GetRoomsWithRefrigerator());
+            Printer.PrintAllClients(hotel.GetAllClients());
+
+            Console.ReadKey();
         }
     }
 }

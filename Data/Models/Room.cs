@@ -11,7 +11,7 @@ namespace Data.Models
 
         public int Number { get; set; }
         public int Capacity { get; set; }
-        public List<Options> Options { get; set; }
+        public List<Options> Options { get; set; } = new List<Options>();
 
 
         public int TypeId { get; set; }

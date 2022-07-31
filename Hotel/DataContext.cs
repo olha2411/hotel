@@ -77,7 +77,7 @@ namespace Hotel
                 Id = 1,
                 Name = "Andriy",
                 Surname = "Buhrovuch",
-                Patroymic = "Valeriiovych",
+                Patronymic = "Valeriiovych",
                 BirthDate = DateTime.Today.AddYears(-18),
                 PhoneNumber = "0984517836",
             },
@@ -87,10 +87,33 @@ namespace Hotel
                 Id = 2,
                 Name = "Ameliya",
                 Surname = "Polyuhovuch",
-                Patroymic = "Viktorivna",
+                Patronymic = "Viktorivna",
                 BirthDate = DateTime.Today.AddYears(-30),
                 PhoneNumber = "0984511336",
             },
+            
+
+            new Client
+            {
+                Id = 3,
+                Name = "Nekras",                
+                Surname = "Kurbas",
+                Patronymic = "Viktorovich",
+                BirthDate = DateTime.Today.AddYears(-31),
+                PhoneNumber = "0989511336",
+            },
+        };
+
+        public static List<Client> ForeignClients = new List<Client>
+        {
+            new Client
+            {
+                Id = 1,
+                Name = "Adolphus",
+                Surname = "Bush",               
+                BirthDate = DateTime.Today.AddYears(-28),
+                PhoneNumber = "0984517836",
+            },           
 
             new Client
             {
@@ -101,7 +124,6 @@ namespace Hotel
                 PhoneNumber = "0989511336",
             },
         };
-
         public static List<Reservation> Reservations = new List<Reservation>
         {
             new Reservation

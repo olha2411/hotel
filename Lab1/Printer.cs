@@ -10,12 +10,12 @@ namespace Lab11
 {
     public static class Printer
     {
-        public static void PrintAllClients(IEnumerable<Client> clients)
+        public static void PrintAllRooms(IEnumerable<Room> rooms)
         {
-            Console.WriteLine("All Clients:");
+            Console.WriteLine("All Rooms:");
 
-            foreach (var item in clients)
-                Console.WriteLine("\t" + item);
+            foreach (var item in rooms)
+                Console.WriteLine($"\t{item}");
             Console.WriteLine();
         }
 
@@ -36,13 +36,13 @@ namespace Lab11
 
             foreach (var client in reservations)
             {
-                Console.WriteLine("\t" + client.Key);
+                Console.WriteLine($"\t{client.Key}");               
                 foreach (var reservation in client.Value)
                     Console.WriteLine($"\t\t{reservation.Reservation} | {reservation.Room}, {reservation.RoomType}");
             }
             Console.WriteLine();
         }
-        
+        //4
         public static void PrintAllRoomsWithTheirTypes(IEnumerable<RoomTypeViewModel> rooms)
         {
             Console.WriteLine("Rooms With Their Types:");
@@ -53,8 +53,8 @@ namespace Lab11
             }
             Console.WriteLine();
         }
-
-        public static void PrintRoomsGroupedByType(Dictionary<RoomType, IEnumerable<Room>> rooms)
+        //5
+        public static void PrintRoomsGroupedByType(Dictionary<int, IEnumerable<Room>> rooms)
         {
             Console.WriteLine("Rooms Grouped By Type:");
 
@@ -66,7 +66,9 @@ namespace Lab11
             }
             Console.WriteLine();
         }
-
+       
+        
+        //6
         public static void PrintClientsWithFewReservations(IEnumerable<Client> reservations)
         {
             Console.WriteLine("Clients With More Than 1 Reservation:");
@@ -75,7 +77,7 @@ namespace Lab11
                 Console.WriteLine($"\t{client}");
             Console.WriteLine();
         }
-
+        //7
         public static void PrintDeluxeRooms(IEnumerable<Room> rooms)
         {
             Console.WriteLine("Deluxe Rooms:");
@@ -87,14 +89,14 @@ namespace Lab11
             Console.WriteLine();
         }
         //8
-        public static void GetClientsWithReservationsCount(Dictionary<Client, IEnumerable<Reservation>> reservations)
+        public static void GetClientsWithReservationsCount(Dictionary<Client, int> reservations)
         {
 
             Console.WriteLine("Clients With Reservations Count:");
 
             foreach (var item in reservations)
             {
-                Console.WriteLine($"\t{item.Key}, reservation number: { item.Value.Count()}");
+                Console.WriteLine($"\t{item.Key}, reservation number: { item.Value}");
             }
             Console.WriteLine();
 
@@ -142,23 +144,12 @@ namespace Lab11
             Console.WriteLine();
         }
 
-        public static void PrintClientsWithPatroymic(IEnumerable<Client> clients)
+        public static void PrintClientsWithPatronymic(IEnumerable<Client> clients)
         {
-            Console.WriteLine("Clients With Patroymic:");
+            Console.WriteLine("Clients With Patronymic:");
 
             foreach (var client in clients)
                 Console.WriteLine($"\t{client}");
-            Console.WriteLine();
-        }
-
-        public static void PrintAllRoomOptions(IEnumerable<Options> options)
-        {
-            Console.WriteLine("All Room Options:");
-
-            foreach (var option in options)
-            {
-                Console.WriteLine($"\t{option}");
-            }
             Console.WriteLine();
         }
 
@@ -171,5 +162,13 @@ namespace Lab11
             Console.WriteLine();
         }
 
+        public static void PrintAllClients(IEnumerable<Client> clients)
+        {
+            Console.WriteLine("All Clients:");
+
+            foreach (var item in clients)
+                Console.WriteLine($"\t{item}");
+            Console.WriteLine();
+        }
     }
 }
