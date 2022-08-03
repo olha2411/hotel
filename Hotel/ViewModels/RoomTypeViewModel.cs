@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Data.Models;
+using HotelStructure.Models;
 
 namespace Hotel.ViewModels
 {

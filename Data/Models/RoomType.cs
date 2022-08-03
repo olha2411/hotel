@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Data.Models
+namespace HotelStructure.Models
 {
     public class RoomType
     {

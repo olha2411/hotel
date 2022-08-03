@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Data.Models.Enums;
+using HotelStructure.Models.Enums;
 
-namespace Data.Models
+namespace HotelStructure.Models
 {
     public class Room
     {

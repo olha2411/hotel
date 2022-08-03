@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Data;
-using Data.Models;
-using Data.Models.Enums;
+using HotelStructure;
+using HotelStructure.Models;
+using HotelStructure.Models.Enums;
 
 
 namespace Hotel
@@ -70,7 +70,7 @@ namespace Hotel
 
         };
 
-        public static List<Client> Clients = new List<Client>
+        public static List<Client> LocalClients = new List<Client>
         {
             new Client
             {

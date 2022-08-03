@@ -1,30 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Data;
-using Data.Models;
+using HotelStructure;
+using HotelStructure.Models;
 using Hotel.ViewModels;
-using Data.Models.Enums;
+using HotelStructure.Models.Enums;
 
 
 namespace Hotel
 {
     public class Queries
     {
-        // 1. All Rooms
-        
+        // 1. All Rooms        
         public IEnumerable<Room> GetAllRooms()
         {
             return from room in DataContext.Rooms
                    select room;
         }
 
-        // 2. All Reservations With Clients And Rooms Info
+        //2. Get All Clients
+        public IEnumerable<Client> GetAllClients()
+        {
+            return DataContext.LocalClients.Concat(DataContext.ForeignClients);
+        }
+
+        // 3. All Reservations With Clients And Rooms Info
 
         public IEnumerable<ReservationViewModel> GetAllReservations()
         {
             return    from reservation in DataContext.Reservations
-                      join client in DataContext.Clients on reservation.ClientId equals client.Id
+                      join client in GetAllClients() on reservation.ClientId equals client.Id
                       join room in DataContext.Rooms on reservation.RoomId equals room.Id
                       join type in DataContext.RoomTypes on room.TypeId equals type.Id                  
                       select new ReservationViewModel
@@ -36,12 +41,12 @@ namespace Hotel
                       };
         }
 
-        // 3. All Reservations With Room Info Grouped By Client, Sorted By Client Surname And CheckIn Date 
+        // 4. All Reservations With Room Info Grouped By Client, Sorted By Client Surname And CheckIn Date 
         
         public Dictionary<Client, IEnumerable<ReservationViewModel>> GetAllReservationsGroupedByClient()
         {
             var query = from reservation in DataContext.Reservations
-                       join client in DataContext.Clients on reservation.ClientId equals client.Id
+                       join client in GetAllClients() on reservation.ClientId equals client.Id
                        join room in DataContext.Rooms on reservation.RoomId equals room.Id
                        join type in DataContext.RoomTypes on room.TypeId equals type.Id
                        orderby client.Surname, reservation.CheckInDate
@@ -59,7 +64,7 @@ namespace Hotel
         }
         
         
-        // 4. Rooms With Their Types
+        // 5. Rooms With Their Types
         public IEnumerable<RoomTypeViewModel> GetAllRoomsWithTheirTypes()
         {
             return DataContext.Rooms.Join(DataContext.RoomTypes,
@@ -72,7 +77,7 @@ namespace Hotel
                    });
         }
 
-        // 5. Rooms Grouped By Type
+        // 6. Rooms Grouped By Type
                
         public Dictionary<int, IEnumerable<Room>> GetRoomsGroupedByType()
         {
@@ -90,17 +95,17 @@ namespace Hotel
 
         }
         
-        // 6. Clients With More Than 1 Reservation
+        // 7. Clients With More Than 1 Reservation
         public IEnumerable<Client> GetClientsWithFewReservations()
             {
-                return from client in DataContext.Clients
+                return from client in GetAllClients()
                        join reservation in DataContext.Reservations on client.Id equals reservation.ClientId
                        group reservation by client into g
                        where g.Count() > 1
                        select g.Key;
             }
 
-        // 7. Deluxe Rooms
+        // 8. Deluxe Rooms
         public IEnumerable<Room> GetDeluxeRooms()
         {
             return from room in DataContext.Rooms
@@ -109,11 +114,11 @@ namespace Hotel
                    select room;
         }
 
-        // 8. Clients With Reservations Count
+        // 9. Clients With Reservations Count
                 
         public Dictionary<Client, int> GetClientsWithReservationsCount()
         {
-            var query = DataContext.Clients.GroupJoin(DataContext.Reservations,
+            var query = GetAllClients().GroupJoin(DataContext.Reservations,
                         c => c.Id,
                         r => r.ClientId,
                         (c, reservations) => new
@@ -129,7 +134,7 @@ namespace Hotel
 
        
 
-        // 9. Rooms With Reservations, Sorted By CheckIn Date
+        // 10. Rooms With Reservations, Sorted By CheckIn Date
         public Dictionary<RoomTypeViewModel, IEnumerable<Reservation>> GetRoomsWithReservations()
         {
             var query =  from room in DataContext.Rooms
@@ -149,7 +154,7 @@ namespace Hotel
           
         }
 
-        // 10. Currently Occupied Rooms
+        // 11. Currently Occupied Rooms
         
         public IEnumerable<RoomTypeViewModel> GetOccupiedRooms()
         {
@@ -165,13 +170,13 @@ namespace Hotel
                    };
         }
 
-        // 11. Client Who Are More Than 21
+        // 12. Client Who Are More Than 21
         public IEnumerable<Client> GetAdultClients()
         {
-            return DataContext.Clients.Where(client => client.BirthDate.AddYears(21) < DateTime.Today);
+            return GetAllClients().Where(client => client.BirthDate.AddYears(21) < DateTime.Today);
         }
         
-        // 12. Currently Unoccupied Rooms
+        // 13. Currently Unoccupied Rooms
         public IEnumerable<RoomTypeViewModel> GetUnoccupiedRooms()
         {
             return GetAllRoomsWithTheirTypes().Select(rt => rt.Room)
@@ -185,14 +190,14 @@ namespace Hotel
 
                          });                   
         }
-        // 13. Clients With Patronymic
+        // 14. Clients With Patronymic
         public IEnumerable<Client> GetClientsWithPatronymic()
         {
-            return DataContext.Clients.Where(client => !string.IsNullOrEmpty(client.Patronymic));
+            return GetAllClients().Where(client => !string.IsNullOrEmpty(client.Patronymic));
         }
               
 
-        // 14. Rooms With Refrigerator
+        // 15. Rooms With Refrigerator
         public IEnumerable<RoomTypeViewModel> GetRoomsWithRefrigerator()
         {
             return from room in DataContext.Rooms
@@ -205,11 +210,7 @@ namespace Hotel
 
                    };
         }
-        //15. Get All Clients
-        public IEnumerable<Client> GetAllClients()
-        {
-            return DataContext.Clients.Concat(DataContext.ForeignClients);
-        }
+        
     }
 }
 

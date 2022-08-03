@@ -51,9 +51,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj">
+    <ProjectReference Include="..\Data\HotelStructure.csproj">
       <Project>{fe8bc90e-313b-4176-83b1-a4b5b8106b4b}</Project>
-      <Name>Data</Name>
+      <Name>HotelStructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\Hotel\Hotel.csproj">
       <Project>{c037b0f6-adef-4247-b9c9-41f2dda47391}</Project>

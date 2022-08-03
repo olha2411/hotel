@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Data.Models
+namespace HotelStructure.Models
 {
     public class Client
     {
@@ -11,7 +11,7 @@ namespace Data.Models
         public string Surname { get; set; }
         public string Name { get; set; }
         public string Patronymic { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateTimeOffset BirthDate { get; set; }
         public string PhoneNumber { get; set; }
 
         public override string ToString()

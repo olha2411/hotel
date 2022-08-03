@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Data.Models;
-using Data.Models.Enums;
+using HotelStructure.Models;
+using HotelStructure.Models.Enums;
 using Hotel.ViewModels;
 
 
@@ -15,6 +15,15 @@ namespace Lab11
             Console.WriteLine("All Rooms:");
 
             foreach (var item in rooms)
+                Console.WriteLine($"\t{item}");
+            Console.WriteLine();
+        }
+
+        public static void PrintAllClients(IEnumerable<Client> clients)
+        {
+            Console.WriteLine("All Clients:");
+
+            foreach (var item in clients)
                 Console.WriteLine($"\t{item}");
             Console.WriteLine();
         }
@@ -162,13 +171,5 @@ namespace Lab11
             Console.WriteLine();
         }
 
-        public static void PrintAllClients(IEnumerable<Client> clients)
-        {
-            Console.WriteLine("All Clients:");
-
-            foreach (var item in clients)
-                Console.WriteLine($"\t{item}");
-            Console.WriteLine();
-        }
     }
 }
