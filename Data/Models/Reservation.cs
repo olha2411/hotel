@@ -5,7 +5,7 @@ using System.Text;
 namespace HotelStructure.Models
 {
     public class Reservation
-    {        
+    {
         public DateTime CheckInDate { get; set; }
 
         public DateTime CheckOutDate { get; set; }
@@ -15,7 +15,7 @@ namespace HotelStructure.Models
 
         public override string ToString()
         {
-            return $"{CheckInDate.ToString("d")} - {CheckOutDate.ToString("d")}";
+            return $"{CheckInDate:d} - {CheckOutDate:d}";
         }
 
     }

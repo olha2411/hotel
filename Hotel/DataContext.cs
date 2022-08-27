@@ -8,9 +8,9 @@ using HotelStructure.Models.Enums;
 
 namespace Hotel
 {
-    public static class DataContext
+    public class DataContext
     {
-        public static List<Room> Rooms = new List<Room>
+        public List<Room> Rooms { get; set; } = new List<Room>
         {
             new Room
             {
@@ -18,7 +18,6 @@ namespace Hotel
                 Number = 34,
                 Capacity = 1,
                 TypeId = 1,
-                Options = new List<Options> {Options.Conditioner, Options.Crib, Options.Refrigerator}
             },
 
             new Room
@@ -27,7 +26,6 @@ namespace Hotel
                 Number = 36,
                 Capacity = 2,
                 TypeId = 2,
-                Options = new List<Options> {Options.Conditioner,Options.Refrigerator}
             },
 
             new Room
@@ -36,7 +34,6 @@ namespace Hotel
                 Number = 41,
                 Capacity = 2,
                 TypeId = 2,
-                Options = new List<Options> {Options.Conditioner,Options.Refrigerator}
             },
 
             new Room
@@ -48,7 +45,76 @@ namespace Hotel
             }
         };
 
-        public static List<RoomType> RoomTypes = new List<RoomType>
+        public List<Option> Options { get; set; } = new List<Option>
+        {
+            new Option
+            {
+                Id = 1,
+                OptionName = "Conditioner"
+            },
+
+            new Option
+            {
+                Id = 2,
+                OptionName = "Crib"
+            },
+
+            new Option
+            {
+                Id = 3,
+                OptionName = "Refrigerator"
+            },
+
+        };
+
+        public List<RoomOption> RoomOptions { get; set; } = new List<RoomOption>
+        {
+            new RoomOption
+            {
+                RoomId = 1,
+                OptionId = 1,
+            },
+
+            new RoomOption
+            {
+                RoomId = 1,
+                OptionId = 2,
+            },
+
+            new RoomOption
+            {
+                RoomId = 1,
+                OptionId = 3,
+            },
+
+            new RoomOption
+            {
+                RoomId = 2,
+                OptionId = 2,
+            },
+
+            new RoomOption
+            {
+                RoomId = 2,
+                OptionId = 3,
+            },
+
+            new RoomOption
+            {
+                RoomId = 3,
+                OptionId = 2,
+            },
+
+            new RoomOption
+            {
+                RoomId = 3,
+                OptionId = 3,
+            },
+
+
+        };
+
+        public List<RoomType> RoomTypes { get; set; } = new List<RoomType>
         {
             new RoomType
             {
@@ -70,7 +136,7 @@ namespace Hotel
 
         };
 
-        public static List<Client> LocalClients = new List<Client>
+        public List<Client> LocalClients { get; set; } = new List<Client>
         {
             new Client
             {
@@ -91,12 +157,12 @@ namespace Hotel
                 BirthDate = DateTime.Today.AddYears(-30),
                 PhoneNumber = "0984511336",
             },
-            
+
 
             new Client
             {
                 Id = 3,
-                Name = "Nekras",                
+                Name = "Nekras",
                 Surname = "Kurbas",
                 Patronymic = "Viktorovich",
                 BirthDate = DateTime.Today.AddYears(-31),
@@ -104,27 +170,27 @@ namespace Hotel
             },
         };
 
-        public static List<Client> ForeignClients = new List<Client>
+        public List<Client> ForeignClients { get; set; } = new List<Client>
         {
             new Client
             {
-                Id = 1,
+                Id = 4,
                 Name = "Adolphus",
-                Surname = "Bush",               
+                Surname = "Bush",
                 BirthDate = DateTime.Today.AddYears(-28),
                 PhoneNumber = "0984517836",
-            },           
+            },
 
             new Client
             {
-                Id = 3,
+                Id = 5,
                 Name = "Nick",
                 Surname = "Aberdeen",
                 BirthDate = DateTime.Today.AddYears(-33),
                 PhoneNumber = "0989511336",
             },
         };
-        public static List<Reservation> Reservations = new List<Reservation>
+        public List<Reservation> Reservations { get; set; } = new List<Reservation>
         {
             new Reservation
             {
@@ -169,4 +235,3 @@ namespace Hotel
 
     }
 }
-

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+
 using Hotel;
 
-namespace Lab11
+namespace Lab1
 {
-    internal class Program
+     class Program
     {
         static void Main(string[] args)
         {
-            Queries hotel = new Queries();
+            Queries hotel = new Queries(new DataContext());
 
             Printer.PrintAllRooms(hotel.GetAllRooms());
             Printer.PrintAllClients(hotel.GetAllClients());
@@ -17,18 +17,18 @@ namespace Lab11
             Printer.PrintAllReservationsGroupedByClient(hotel.GetAllReservationsGroupedByClient());
             Printer.PrintAllRoomsWithTheirTypes(hotel.GetAllRoomsWithTheirTypes());
             Printer.PrintRoomsGroupedByType(hotel.GetRoomsGroupedByType());
-            Printer.PrintClientsWithFewReservations(hotel.GetClientsWithFewReservations());
+            Printer.PrintClientsWithFewReservations(hotel.GetClientsWithFewReservations(1));
             Printer.PrintDeluxeRooms(hotel.GetDeluxeRooms());
             Printer.GetClientsWithReservationsCount(hotel.GetClientsWithReservationsCount());
             Printer.PrintRoomsWithReservations(hotel.GetRoomsWithReservations());
             Printer.PrintOccupiedRooms(hotel.GetOccupiedRooms());
-            Printer.PrintAdultClients(hotel.GetAdultClients());
+            Printer.PrintAdultClients(hotel.GetAdultClients(21));
             Printer.PrintUnoccupiedRooms(hotel.GetUnoccupiedRooms());
-            Printer.PrintClientsWithPatronymic(hotel.GetClientsWithPatronymic());            
+            Printer.PrintClientsWithPatronymic(hotel.GetClientsWithPatronymic());
             Printer.PrintRoomsWithRefrigerator(hotel.GetRoomsWithRefrigerator());
-            
 
             Console.ReadKey();
+
         }
     }
 }
